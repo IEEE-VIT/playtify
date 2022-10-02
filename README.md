@@ -32,7 +32,7 @@ flutter run
 
 ## Contributing
 
-To start contributing, check out [CONTRIBUTING.md](https://github.com/IEEE-VIT/playtify/CONTRIBUTING.md). New contributors are always welcome to support this project. If you want something gentle to start with, check out issues labelled as easy or good-first-issue. Check out issues labelled as hacktoberfest if you are up for some grabs! Kindly consider leaving a ⭐ if you like the repository and our organisation :)
+To start contributing, check out [CONTRIBUTING.md](https://github.com/IEEE-VIT/playtify/blob/main/CONTRIBUTING.md). New contributors are always welcome to support this project. If you want something gentle to start with, check out issues labelled as easy or good-first-issue. Check out issues labelled as hacktoberfest if you are up for some grabs! Kindly consider leaving a ⭐ if you like the repository and our organisation :)
 
 ## Licence ##  
-This project is licensed under [MIT](https://github.com/IEEE-VIT/playtify/blob/master/LICENSE)
+This project is licensed under [MIT](https://github.com/IEEE-VIT/playtify/blob/main/LICENSE.md)
