@@ -1,8 +1,12 @@
+![](https://tipseason.com/assets/images/hacktoberfest-banner.jpg)
 # Playtify
 
 ## About
 
-Playtify is an application which recommends a playlist based on your mood!
+Playtify is an application which recommends a playlist based on your mood! 
+This project encourages all the developers who are new to app development and open-source community to join in and contribute in order to learn by implementation. 
+Number of issues have been created in this repository which have the easy,medium and hard labels. 
+Add a comment if you want to work with one and I shall assign it to you. Thank you and happy coding! 
 
 ## Tech Stack
 
