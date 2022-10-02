@@ -14,7 +14,7 @@ Playtify is an application which recommends a playlist based on your mood!
 To get started:
 
 - Clone the repo.
-  `https://github.com/Shubhbansal9/Playtify`
+  'https://github.com/IEEE-VIT/playtify.git'
 - Checkout to a new branch.
   `git checkout -b my-amazing-feature`
 - Make some amazing changes.
