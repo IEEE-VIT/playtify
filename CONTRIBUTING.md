@@ -1,7 +1,10 @@
 # Contributing Guidelines
 
 This document contains certain rules and guidelines that developers are expected to follow, while contributing to any repository.
-
+- Number of issues have been created in this repository which have the easy,medium and hard labels.
+- Add a comment if you want to work with one and It will get assigned to you.
+- Issue assignment will be based on first-come-first-serve basis.
+- After assignment,please report back the progress on the issue in every 3 days.
 ---
 
 ## 1. Commit Messages
