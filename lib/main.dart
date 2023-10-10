@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playtify/home_screen.dart';
+import 'home_screen.dart';
 
 void main() {
   runApp(const MyApp());
