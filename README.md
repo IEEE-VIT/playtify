@@ -1,5 +1,3 @@
-![](https://github.com/IEEE-VIT/playtify/blob/main/playtify.png)
-
 # Playtify
 <img src="./images/playtify.png" alt="README Banner">
 
