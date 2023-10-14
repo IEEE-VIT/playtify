@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:playtify/logic/recently_played.dart';
+import 'package:playtify/pages/playlist.dart';
+import 'package:playtify/pages/search.dart';
 import 'package:provider/provider.dart';
-
-import 'logic/recently_played.dart';
+// import 'pages/recently_played.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +16,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> widgetOptions = <Widget>[];
+  static const List<Widget> pages = <Widget>[
+    RecentlyPlayed(),
+    SearchPage(),
+    PlayListPage(),
+  ];
 
   void onItemTapped(int index) {
     setState(() {
@@ -29,70 +35,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Playtify home screen"),
       ),
-      body: SafeArea(
-          child: ListView(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Material(
-                child: ChangeNotifierProvider(
-                  create: (_) => RecentlyPlayedLogic(),
-                  child: const RecentlyPlayed(),
-                ),
+      body: IndexedStack(index: selectedIndex, children: pages),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
+        iconSize: 30,
+        currentIndex: selectedIndex,
+        onTap: (value) {
+          onItemTapped(value);
+        },
+        backgroundColor: Colors.blue,
+        selectedItemColor: Colors.blue,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.headphones,
+                color: Colors.black,
+                size: 40,
               ),
-              // MadeforYou(),
-              // RecomendedforYou(),
-              // PopularTrending(),
-              // EditorsPicks(),
-              // GlobalReleases(),
-              // BecauseYouLike(),
-            ],
-          ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.black,
+                size: 40,
+              ),
+              label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.queue_music_outlined,
+                color: Colors.black,
+                size: 40,
+              ),
+              label: ""),
         ],
-      )),
-      bottomNavigationBar: Container(
-        height: 60.0,
-        color: Colors.grey.withOpacity(0.2),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.home),
-                Text("Home"),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.search),
-                Text("Search"),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.library_music),
-                Text("Library"),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.person_outline),
-                Text("Premium"),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -108,78 +83,84 @@ class RecentlyPlayed extends StatelessWidget {
       recentlyPlayed.getSongHistory();
     }
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const InkWell(
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Icon(Icons.settings),
-            ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 10.0),
-          child: Text(
-            "Recently played",
-            style: TextStyle(fontFamily: 'Proxima Nova Bold', fontSize: 30.0),
-          ),
-        ),
-        !recentlyPlayed.funCalled
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : SizedBox(
-                height: MediaQuery.of(context).size.height * 0.30,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recentlyPlayed.recntlyPlayedStuff.length,
-                  itemBuilder: (context, i) {
-                    return Container(
-                      margin: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            width: MediaQuery.of(context).size.height * 0.2,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image:
-                                  /*(recentlyPlayed
-                                          .recntlyPlayedStuff[i].type ==
-                                      "song")
-                                  ? NetworkImage(recentlyPlayed
-                                      .recntlyPlayedStuff[i].thumbnail)
-                                  :*/
-                                  AssetImage(recentlyPlayed
-                                      .recntlyPlayedStuff[i].thumbnail),
-                              fit: BoxFit.cover,
-                            )),
-                          ),
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            recentlyPlayed.recntlyPlayedStuff[i].title,
-                            style: const TextStyle(
-                              fontFamily: 'Proxima Nova Bold',
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const InkWell(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Icon(Icons.settings),
                 ),
               ),
-      ],
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 10.0),
+              child: Text(
+                "Recently played",
+                style:
+                    TextStyle(fontFamily: 'Proxima Nova Bold', fontSize: 30.0),
+              ),
+            ),
+            !recentlyPlayed.funCalled
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.30,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recentlyPlayed.recntlyPlayedStuff.length,
+                      itemBuilder: (context, i) {
+                        return Container(
+                          margin: const EdgeInsets.all(15.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                width: MediaQuery.of(context).size.height * 0.2,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  image:
+                                      /*(recentlyPlayed
+                                                .recntlyPlayedStuff[i].type ==
+                                            "song")
+                                        ? NetworkImage(recentlyPlayed
+                                            .recntlyPlayedStuff[i].thumbnail)
+                                        :*/
+                                      AssetImage(recentlyPlayed
+                                          .recntlyPlayedStuff[i].thumbnail),
+                                  fit: BoxFit.cover,
+                                )),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Text(
+                                recentlyPlayed.recntlyPlayedStuff[i].title,
+                                style: const TextStyle(
+                                  fontFamily: 'Proxima Nova Bold',
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+          ],
+        ),
+      ),
     );
   }
 }
