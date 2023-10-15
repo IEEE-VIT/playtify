@@ -14,8 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  
   static const List<Widget> pages = <Widget>[
     RecentlyPlayed(),
     SearchPage(),
