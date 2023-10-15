@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       create: (_) => RecentlyPlayedLogic(),
       child: MaterialApp(
         title: 'Playtify',
-        theme: ThemeData(
+        theme: ThemeData(useMaterial3: true,
           primarySwatch: Colors.blue,
         ),
         home: const HomeScreen(),
