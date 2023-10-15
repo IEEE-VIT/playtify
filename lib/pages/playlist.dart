@@ -10,14 +10,13 @@ class PlayListPage extends StatefulWidget {
 class _PlayListPageState extends State<PlayListPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            Image.network(
-                "https://static.vecteezy.com/system/resources/previews/023/506/852/original/cute-kawaii-mushroom-chibi-mascot-cartoon-style-vector.jpg"),
-                const Text("Library Goes here",style: TextStyle(fontSize: 30),)
+          
+                Text("Library Goes here",style: TextStyle(fontSize: 30),)
           ],
         ),
       ),
