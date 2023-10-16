@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playtify/logic/recently_played.dart';
 import 'package:playtify/pages/playlist.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:playtify/pages/search.dart';
 import 'package:provider/provider.dart';
 // import 'pages/recently_played.dart';
@@ -14,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  
+
   static const List<Widget> pages = <Widget>[
     RecentlyPlayed(),
     SearchPage(),
@@ -31,10 +33,127 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Add Bottom Navigation Bar Here : Dashboard and Playlist Add/Remove View
     return Scaffold(
+      // backgroundColor: Color.fromARGB(0, 0, 0, 180),
+      backgroundColor: Colors.blue,
+
       appBar: AppBar(
-        title: const Text("Playtify home screen"),
+        title: const Text("Home",
+            style: TextStyle(
+              fontFamily: 'Proxima Nova Bold',
+              fontSize: 31,
+            )),
+        backgroundColor: Colors.blue,
+        toolbarHeight: 70,
       ),
-      body: IndexedStack(index: selectedIndex, children: pages),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 3, top: 10, right: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Recently Played",
+                    style: TextStyle(
+                      fontFamily: 'Proxima Nova Bold',
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: TextStyle(
+                      fontFamily: 'Proxima Nova Bold',
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Container(
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //           child: GridView.count(
+            //         crossAxisCount: 2,
+            //         crossAxisSpacing: 10.0,
+            //         mainAxisSpacing: 10.0,
+            //         shrinkWrap: true,
+            //         children: List.generate(
+            //           20,
+            //           (index) {
+            //             return Padding(
+            //               padding: const EdgeInsets.all(10.0),
+            //               child: Container(
+            //                 decoration: BoxDecoration(
+            //                   image: DecorationImage(
+            //                     image: NetworkImage('img.png'),
+            //                     fit: BoxFit.cover,
+            //                   ),
+            //                   borderRadius: BorderRadius.all(
+            //                     Radius.circular(20.0),
+            //                   ),
+            //                 ),
+            //               ),
+            //             );
+            //           },
+            //         ),
+            //       )),
+            //     ],
+            //   ),
+            // ),
+            Container(
+              padding: EdgeInsets.only(left: 2, right: 2),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Featured Playlist",
+                    style: TextStyle(
+                      fontFamily: 'Proxima Nova Bold',
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: TextStyle(
+                      fontFamily: 'Proxima Nova Bold',
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 1, top: 20, right: 1),
+              child: CarouselSlider(
+                options: CarouselOptions(height: 200.0),
+                items: [
+                  "assets/south.png",
+                  "assets/south.png",
+                  "assets/south.png"
+                ].map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                              // color: Colors.amber,
+
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                              child: Image(
+                                  image: AssetImage(
+                            "$i",
+                          ))));
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         iconSize: 30,
