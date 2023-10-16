@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'Album.dart';
+import 'album.dart';
 
 class SpotifyAPI {
   //Initialise necessary variables from Spotify API
