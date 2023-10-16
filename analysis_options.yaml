@@ -1,28 +1,211 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
-
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    - avoid_empty_else
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    # When mixing relative and absolute imports it’s possible to create confusion where the same member gets imported in two different ways. An easy way to avoid that is to ensure you have no relative imports that include lib/ in their paths.
+    - avoid_relative_lib_imports
+
+    # AVOID using a parameter name that is the same as an existing type.
+    - avoid_types_as_parameter_names
+
+    # AVOID using await on anything which is not a future.
+    # Await is allowed on the types: Future<X>, FutureOr<X>, Future<X>?, FutureOr<X>? and dynamic.
+    # Further, using await null is specifically allowed as a way to introduce a microtask delay.
+    - await_only_futures
+
+    # DO name extensions using UpperCamelCase. Extensions should capitalize the first letter of each word (including the first word), and use no separators.
+    - camel_case_extensions
+
+    # DO name types using UpperCamelCase. 
+    # Classes and typedefs should capitalize the first letter of each word (including the first word), and use no separators.
+    - camel_case_types
+
+    # DON’T invoke certain collection method with an argument with an unrelated type.
+    - collection_methods_unrelated_type
+    - curly_braces_in_flow_control_structures
+
+    # DO depend on referenced packages. When importing a package, add a dependency on it to the pubspec.
+    - depend_on_referenced_packages
+
+    # In general, empty catch blocks should be avoided. 
+    # In cases where they are intended, a comment should be provided to explain why exceptions are being caught and suppressed. 
+    # Alternatively, the exception identifier can be named with underscores (e.g., _) to indicate that we intend to skip it.
+    - empty_catches
+
+    # DO name source files using lowercase_with_underscores
+    - file_names
+
+    # Every object in Dart has a hashCode. Both the == operator and the hashCode property of objects must be consistent in order for a common hash map implementation to function properly. 
+    # Thus, when overriding ==, the hashCode should also be overridden to maintain consistency. Similarly, if hashCode is overridden, == should be also.
+    - hash_and_equals
+
+    # Don't use more than one case with same value.
+    - no_duplicate_case_values
+
+    # Name non-constant identifiers using lowerCamelCase.
+    - non_constant_identifier_names
+
+    # Don't use null check on a potentially nullable type parameter.
+    - null_check_on_nullable_type_parameter
+
+    # Prefix library names with the package name and a dot-separated path.
+    - package_prefixed_library_names
+
+    # Use isEmpty for Iterables and Maps.
+    # Use isNotEmpty for Iterables and Maps.
+    - prefer_is_empty
+    - prefer_is_not_empty
+
+    # Prefer to use whereType on iterable.
+    - prefer_iterable_whereType
+
+    # PREFER specifying a type annotation for uninitialized variables and fields.
+    - prefer_typing_uninitialized_variables
+
+    # DO Use secure urls in pubspec.yaml.
+    # Use https instead of http or git
+    - secure_pubspec_urls
+
+    # If you meant to test if the object has type Foo, instead write Foo _.
+    - type_literal_in_constant_pattern
+
+    # Don't override a method to do a super method invocation with the same parameters.
+    - unnecessary_overrides
+
+    # Comparing references of a type where neither is a subtype of the other most likely will return false and might not reflect programmer’s intent.
+    - unrelated_type_equality_checks
+
+    # DO use strings in `part of` directives.
+    - use_string_in_part_of_directives
+
+    # Use valid regular expression syntax
+    - valid_regexps
+
+    # DON'T assign to void
+    - void_checks
+
+    # Annotate overridden members
+    - annotate_overrides
+
+    # AVOID using forEach with a function literal
+    # The for loop enables a developer to be clear and explicit as to their intent. 
+    # A return in the body of the for loop returns from the body of the function, where as a return in the body of the forEach closure only returns a value for that iteration of the forEach. 
+    # The body of a for loop can contain awaits, while the closure body of a forEach cannot.
+    - avoid_function_literals_in_foreach_calls
+
+    # Adding = null is redundant and unneeded
+    - avoid_init_to_null
+
+    # DON’T check for null in custom == operators
+    # As null is a special value, no instance of any class (other than Null) can be equivalent to it. Thus, it is redundant to check whether the other instance is null.
+    - avoid_null_checks_in_equality_operators
+
+    # Don't rename parameters of overridden methods.
+    - avoid_renaming_method_parameters
+
+    - avoid_return_types_on_setters
+    - avoid_returning_null_for_void
+    - avoid_single_cascade_in_expression_statements
+    - constant_identifier_names
+
+    # AVOID control flow leaving finally blocks. Using control flow in finally blocks will inevitably cause unexpected behavior that is hard to debug.
+    - control_flow_in_finally
+    - empty_constructor_bodies
+    - empty_statements
+
+    # Define case clauses for all constants in enum-like classes.
+    - exhaustive_cases
+
+    # DON’T import implementation files from another package.
+    - implementation_imports
+
+    # Name libraries using lowercase_with_underscores
+    - library_names
+
+    # Use lowercase_with_underscores when specifying a library prefix.
+    - library_prefixes
+
+    - no_leading_underscores_for_library_prefixes
+    - no_leading_underscores_for_local_identifiers
+
+    # DON’T pass null as an argument where a closure is expected.
+    # Often a closure that is passed to a method will only be called conditionally, so that tests and “happy path” production calls do not reveal that null will result in an exception being thrown.
+    - null_closures
+
+    # DON’T override fields.
+    # Overriding fields is almost always done unintentionally. Regardless, it is a bad practice to do so.
+    - overridden_fields
+
+    # Use lowercase_with_underscores for package names.
+    - package_names
+
+    # DO use adjacent strings to concatenate string literals.
+    - prefer_adjacent_string_concatenation
+
+    # DO use collection literals when possible.
+    - prefer_collection_literals
+
+    # Prefer using ??= over testing for null
+    - prefer_conditional_assignment
+
+    # Use contains for List and String instances.
+    - prefer_contains
+
+    # Private field could be final
+    - prefer_final_fields
+
+    # Prefer 'for' elements when building maps from iterables.
+    - prefer_for_elements_to_map_fromIterable
+
+    # DO use a function declaration to bind a function to a name.
+    # As Dart allows local function declarations, it is a good practice to use them in the place of function literals.
+    - prefer_function_declarations_over_variables
+
+    # PREFER using if null operators instead of null checks in conditional expressions. 
+    - prefer_if_null_operators
+
+    # DO use initializing formals when possible.
+    # Using initializing formals when possible makes your code more terse.
+    - prefer_initializing_formals
+
+    # Inline list item declarations where possible.
+    - prefer_inlined_adds
+    - prefer_interpolation_to_compose_strings
+    
+    # Prefer is! operator.
+    - prefer_is_not_operator
+
+    # PREFER using null aware operators instead of null checks in conditional expressions.
+    - prefer_null_aware_operators
+
+    # Use spread collections when possible.
+    # Collection literals are excellent when you want to create a new collection out of individual items. But, when existing items are already stored in another collection, spread collection syntax leads to simpler code.
+    - prefer_spread_collections
+
+    # DON’T create recursive getters. 
+    # Recursive getters are getters which return themselves as a value. This is usually a typo.
+    - recursive_getters
+
+    # Prefer using /// for doc comments.
+    - slash_for_doc_comments
+
+    # DON’T type annotate initializing formals.
+    - type_init_formals
+
+    # Avoid using braces in interpolation when not needed.
+    - unnecessary_brace_in_string_interps
+    - unnecessary_const
+    - unnecessary_constructor_name
+    - unnecessary_getters_setters
+    - unnecessary_late
+    - unnecessary_new
+    - unnecessary_null_aware_assignments
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_nullable_for_final_variable_declarations
+    - unnecessary_string_escapes
+    - unnecessary_string_interpolations
+    - unnecessary_this
+    - unnecessary_to_list_in_spreads
+    - use_function_type_syntax_for_parameters
+    - use_rethrow_when_possible
+    - use_super_parameters
