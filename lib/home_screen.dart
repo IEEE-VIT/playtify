@@ -3,7 +3,6 @@ import 'package:playtify/logic/recently_played.dart';
 import 'package:playtify/pages/playlist.dart';
 import 'package:playtify/pages/search.dart';
 import 'package:provider/provider.dart';
-// import 'pages/recently_played.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  
+
   static const List<Widget> pages = <Widget>[
     RecentlyPlayed(),
     SearchPage(),
@@ -29,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Add Bottom Navigation Bar Here : Dashboard and Playlist Add/Remove View
     return Scaffold(
       appBar: AppBar(
         title: const Text("Playtify home screen"),
@@ -39,11 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.shifting,
         iconSize: 30,
         currentIndex: selectedIndex,
-        onTap: (value) {
-          onItemTapped(value);
-        },
-        backgroundColor: Colors.blue,
-        selectedItemColor: Colors.blue,
+        onTap: onItemTapped,  // Directly using the onItemTapped function here
         items: const [
           BottomNavigationBarItem(
               icon: Icon(
@@ -73,13 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class RecentlyPlayed extends StatelessWidget {
-  const RecentlyPlayed({super.key});
+  const RecentlyPlayed({Key? key}) : super(key: key);  // Corrected this line
 
   @override
   Widget build(BuildContext context) {
     final recentlyPlayed = Provider.of<RecentlyPlayedLogic>(context);
+
     if (!recentlyPlayed.funCalled) {
       recentlyPlayed.getSongHistory();
+      recentlyPlayed.funCalled = true; // To ensure the function isn't called multiple times
     }
 
     return SafeArea(
@@ -130,14 +126,7 @@ class RecentlyPlayed extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                   image:
-                                      /*(recentlyPlayed
-                                                .recntlyPlayedStuff[i].type ==
-                                            "song")
-                                        ? NetworkImage(recentlyPlayed
-                                            .recntlyPlayedStuff[i].thumbnail)
-                                        :*/
-                                      AssetImage(recentlyPlayed
-                                          .recntlyPlayedStuff[i].thumbnail),
+                                      AssetImage(recentlyPlayed.recntlyPlayedStuff[i].thumbnail),
                                   fit: BoxFit.cover,
                                 )),
                               ),
