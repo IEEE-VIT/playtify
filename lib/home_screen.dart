@@ -31,11 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Add Bottom Navigation Bar Here : Dashboard and Playlist Add/Remove View
     return Scaffold(
-      // backgroundColor: Color.fromARGB(0, 0, 0, 180),
       backgroundColor: Colors.blue,
-
       appBar: AppBar(
         title: const Text("Home",
             style: TextStyle(
@@ -70,71 +67,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            // Container(
-            //   child: Row(
-            //     children: [
-            //       Container(
-            //           child: GridView.count(
-            //         crossAxisCount: 2,
-            //         crossAxisSpacing: 10.0,
-            //         mainAxisSpacing: 10.0,
-            //         shrinkWrap: true,
-            //         children: List.generate(
-            //           20,
-            //           (index) {
-            //             return Padding(
-            //               padding: const EdgeInsets.all(10.0),
-            //               child: Container(
-            //                 decoration: BoxDecoration(
-            //                   image: DecorationImage(
-            //                     image: NetworkImage('img.png'),
-            //                     fit: BoxFit.cover,
-            //                   ),
-            //                   borderRadius: BorderRadius.all(
-            //                     Radius.circular(20.0),
-            //                   ),
-            //                 ),
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //       )),
-            //     ],
-            //   ),
-            // ),
             Container(
-              padding: EdgeInsets.only(left:1),
+              padding: EdgeInsets.only(left: 1),
               child: SizedBox(
-    
-      height: 150,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          CategoryCardMallika1(
-            title: "Cake",
-            image:
-                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/malika%2FImage-1.png?alt=media&token=245741de-7966-4f5b-805f-6dd8e5dbea80",
-            onTap: () {},
-            selected: false,
-          ),
-          CategoryCardMallika1(
-              title: "Pasta",
-              image:
-                  "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/malika%2FImage-2.png?alt=media&token=3ae6f4e6-53cd-4ac1-9e12-b491c351771a",
-              onTap: () {}),
-          CategoryCardMallika1(
-              title: "Drinks",
-              image:
-                  "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/malika%2FImage-3.png?alt=media&token=43ed89ab-93de-42ca-90df-0231699eebf0",
-              onTap: () {}),
-          CategoryCardMallika1(
-              title: "Rice",
-              image:
-                  "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/malika%2FImage-4.png?alt=media&token=0c2592ca-7bbc-40fa-80ae-163d739e308f",
-              onTap: () {}),
-        ],
-      
-    )              ),
+                  height: 150,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      CategoryCardMallika1(
+                        title: "Pop",
+                        image: "assets/pop.jpg",
+                        onTap: () {},
+                        selected: false,
+                      ),
+                      CategoryCardMallika1(
+                          title: "Love",
+                          image:
+                              "assets/love.png",
+                          onTap: () {}),
+                      CategoryCardMallika1(
+                          title: "Song",
+                          image: "assets/love.png",
+                          onTap: () {}),
+                      CategoryCardMallika1(
+                          title: "Song",
+                          image:
+                              "assets/pop.jpg",
+                          onTap: () {}),
+                    ],
+                  )),
             ),
             Container(
               padding: EdgeInsets.only(left: 2, right: 2),
@@ -188,6 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+    
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         iconSize: 30,
@@ -317,10 +279,6 @@ class RecentlyPlayed extends StatelessWidget {
   }
 }
 
-
-
-
-
 class CategoryCardMallika1 extends StatelessWidget {
   final String title;
   final String image;
@@ -348,7 +306,7 @@ class CategoryCardMallika1 extends StatelessWidget {
                       width: selected ? 2 : 0, color: const Color(0xffFF8527)),
                   borderRadius: BorderRadius.circular(20.0)),
               child: ClipRRect(
-                child: Image.network(
+                child: Image.asset(
                   image,
                   width: 75,
                   height: 75,
