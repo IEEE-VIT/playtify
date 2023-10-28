@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playtify/logic/recently_played.dart';
+import 'package:playtify/pages/splash.dart';
 import 'package:provider/provider.dart';
-import 'home_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true,
           primarySwatch: Colors.blue,
         ),
-        home: const HomeScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
